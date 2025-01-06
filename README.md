@@ -1,4 +1,4 @@
-# BacDive API
+#  SwipeBiome API tools
 
 A REST API service for accessing and searching bacteria information from the BacDive database.
 
