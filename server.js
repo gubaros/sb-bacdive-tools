@@ -70,6 +70,8 @@ app.get('/api/stats', (req, res) => {
   res.json(stats);
 });
 
+export default app;
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`Total records loaded: ${bacteriaData.length}`);

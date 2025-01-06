@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
     "start": "node server.js"
   },
   "author": "",
@@ -16,8 +16,7 @@
   },
   "devDependencies": {
     "jest": "^29.x.x",
-    "supertest": "^6.x.x",
-    "@babel/preset-env": "^7.x.x"
+    "supertest": "^6.x.x"
   },
   "type": "module"
 }
