@@ -18,5 +18,8 @@
     "jest": "^29.x.x",
     "supertest": "^6.x.x"
   },
-  "type": "module"
+  "type": "module",
+  "engines": {
+    "node": ">=14.18.0"
+  }
 }
