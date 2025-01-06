@@ -1,6 +1,7 @@
 import express from 'express';
 import { readFileSync } from 'fs';
 
+const test = 'test';
 const app = express();
 const PORT = process.env.PORT || 3000;
 
