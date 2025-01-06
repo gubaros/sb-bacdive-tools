@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "NODE_OPTIONS=--experimental-vm-modules jest",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
@@ -13,5 +14,12 @@
     "dotenv": "^16.x.x",
     "express": "^4.21.2"
   },
-  "type": "module"
+  "devDependencies": {
+    "jest": "^29.x.x",
+    "supertest": "^6.x.x"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=14.18.0"
+  }
 }
