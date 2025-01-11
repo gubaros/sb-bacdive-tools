@@ -1,8 +1,11 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
 import { writeFileSync } from 'fs';
+<<<<<<< HEAD
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
+=======
+>>>>>>> origin/main
 
 dotenv.config();
 
@@ -15,6 +18,7 @@ if (!SESSION_COOKIE) {
   process.exit(1);
 }
 
+<<<<<<< HEAD
 /**
  * @swagger
  * components:
@@ -149,6 +153,8 @@ const fetchDetailsForId = async (id) => {
  *       401:
  *         description: Unauthorized - Valid SESSION_COOKIE required
  */
+=======
+>>>>>>> origin/main
 const fetchIdsForGenus = async (genus) => {
   let page = 0;
   let allIds = [];
@@ -186,6 +192,7 @@ const fetchIdsForGenus = async (genus) => {
   return allIds;
 };
 
+<<<<<<< HEAD
 /**
  * @swagger
  * components:
@@ -210,6 +217,44 @@ const fetchIdsForGenus = async (genus) => {
  *         external_links:
  *           type: object
  */
+=======
+const fetchDetailsForId = async (id) => {
+  if (!id || id === "0") {
+    console.error(`Skipping invalid ID: ${id}`);
+    return null;
+  }
+
+  try {
+    const url = `${FETCH_BASE_URL}/${id}`;
+    console.log(`Fetching details for ID: ${id} from ${url}`);
+    const response = await axios.get(url, {
+      headers: {
+        'Accept': 'application/json',
+        'Cookie': `bacdive_api_session=${SESSION_COOKIE}`
+      }
+    });
+
+    const results = response.data.results;
+    if (!results || !results[id]) {
+      console.error(`No details found for ID ${id}`);
+      return null;
+    }
+
+    const detail = results[id];
+    if (!detail["General"]) {
+      detail["General"] = {};
+    }
+    detail["General"]["BacDive-ID"] = id;
+    
+    console.log(`Successfully fetched and processed ID: ${id}`);
+    return detail;
+  } catch (error) {
+    console.error(`Error fetching details for ID ${id}: ${error.response?.status || error.message}`);
+    return null;
+  }
+};
+
+>>>>>>> origin/main
 const transformDetails = (rawData) => {
   try {
     const identifier = rawData["General"]["BacDive-ID"];

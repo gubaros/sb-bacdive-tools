@@ -33,4 +33,8 @@ Returns general statistics about the database
 ## Installation
 
 1. Clone the repository
+<<<<<<< HEAD
 2. Install dependencies:
+=======
+2. Install dependencies:
+>>>>>>> origin/main

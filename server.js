@@ -1,7 +1,10 @@
 import express from 'express';
 import { readFileSync } from 'fs';
+<<<<<<< HEAD
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
+=======
+>>>>>>> origin/main
 
 const test = 'test';
 const app = express();
@@ -16,6 +19,7 @@ const bacteriaIndex = new Map(
 
 app.use(express.json());
 
+<<<<<<< HEAD
 // Swagger Configuration
 const swaggerOptions = {
   definition: {
@@ -58,6 +62,8 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
  *       200:
  *         description: List of bacteria
  */
+=======
+>>>>>>> origin/main
 app.get('/api/bacteria', (req, res) => {
   const page = parseInt(req.query.page) || 1;
   const limit = parseInt(req.query.limit) || 100;
@@ -74,6 +80,7 @@ app.get('/api/bacteria', (req, res) => {
   });
 });
 
+<<<<<<< HEAD
 /**
  * @swagger
  * /api/bacteria/{id}:
@@ -92,6 +99,8 @@ app.get('/api/bacteria', (req, res) => {
  *       404:
  *         description: Bacteria not found
  */
+=======
+>>>>>>> origin/main
 app.get('/api/bacteria/:id', (req, res) => {
   const bacteria = bacteriaIndex.get(req.params.id);
   if (!bacteria) {
@@ -100,6 +109,7 @@ app.get('/api/bacteria/:id', (req, res) => {
   res.json(bacteria);
 });
 
+<<<<<<< HEAD
 /**
  * @swagger
  * /api/search:
@@ -120,6 +130,8 @@ app.get('/api/bacteria/:id', (req, res) => {
  *       200:
  *         description: Search results
  */
+=======
+>>>>>>> origin/main
 app.get('/api/search', (req, res) => {
   const { genus, species } = req.query;
   
@@ -143,6 +155,7 @@ app.get('/api/search', (req, res) => {
   });
 });
 
+<<<<<<< HEAD
 /**
  * @swagger
  * /api/stats:
@@ -152,6 +165,8 @@ app.get('/api/search', (req, res) => {
  *       200:
  *         description: General statistics
  */
+=======
+>>>>>>> origin/main
 app.get('/api/stats', (req, res) => {
   const stats = {
     totalRecords: bacteriaData.length,
@@ -161,6 +176,7 @@ app.get('/api/stats', (req, res) => {
   res.json(stats);
 });
 
+<<<<<<< HEAD
 // Exportar el servidor para poder cerrarlo en las pruebas
 const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
@@ -168,3 +184,11 @@ const server = app.listen(PORT, () => {
 });
 
 export { app, server };  // Exportamos tanto app como server 
+=======
+export default app;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log(`Total records loaded: ${bacteriaData.length}`);
+}); 
+>>>>>>> origin/main
