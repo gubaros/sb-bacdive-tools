@@ -2,6 +2,10 @@
 const config = {
   testEnvironment: 'node',
   transform: {},
+<<<<<<< HEAD
+=======
+  extensionsToTreatAsEsm: ['.js'],
+>>>>>>> origin/main
   moduleNameMapper: {
     '^(\\.{1,2}/.*)\\.js$': '$1',
   },

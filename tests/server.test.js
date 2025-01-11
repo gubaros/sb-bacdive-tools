@@ -1,4 +1,5 @@
 import request from 'supertest';
+<<<<<<< HEAD
 import { app, server } from '../server.js';
 
 describe('API Tests', () => {
@@ -6,6 +7,11 @@ describe('API Tests', () => {
     server.close(done);
   });
 
+=======
+import app from '../server.js';
+
+describe('API Tests', () => {
+>>>>>>> origin/main
   test('GET /api/stats should return database statistics', async () => {
     const response = await request(app)
       .get('/api/stats')
