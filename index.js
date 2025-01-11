@@ -24,7 +24,7 @@ if (!SESSION_COOKIE) {
  *       properties:
  *         identifier:
  *           type: string
- *           description: BacDive ID único de la bacteria
+ *           description: Unique BacDive ID of the bacteria
  *         general:
  *           type: object
  *           properties:
@@ -57,25 +57,25 @@ if (!SESSION_COOKIE) {
  * @swagger
  * /fetch/{id}:
  *   get:
- *     summary: Obtiene detalles de una bacteria por su ID
+ *     summary: Get details for a bacteria by ID
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: BacDive ID de la bacteria
+ *         description: BacDive ID of the bacteria
  *     responses:
  *       200:
- *         description: Detalles de la bacteria
+ *         description: Bacteria details
  *         content:
  *           application/json:
  *             schema:
  *               $ref: '#/components/schemas/BacteriaDetail'
  *       404:
- *         description: Bacteria no encontrada
+ *         description: Bacteria not found
  *       401:
- *         description: No autorizado - Se requiere SESSION_COOKIE válida
+ *         description: Unauthorized - Valid SESSION_COOKIE required
  */
 const fetchDetailsForId = async (id) => {
   if (!id || id === "0") {
@@ -117,22 +117,22 @@ const fetchDetailsForId = async (id) => {
  * @swagger
  * /taxon/{genus}:
  *   get:
- *     summary: Obtiene todos los IDs de bacterias para un género específico
+ *     summary: Get all bacteria IDs for a specific genus
  *     parameters:
  *       - in: path
  *         name: genus
  *         required: true
  *         schema:
  *           type: string
- *         description: Nombre del género bacteriano
+ *         description: Bacterial genus name
  *       - in: query
  *         name: page
  *         schema:
  *           type: integer
- *         description: Número de página para la paginación
+ *         description: Page number for pagination
  *     responses:
  *       200:
- *         description: Lista de IDs de bacterias
+ *         description: List of bacteria IDs
  *         content:
  *           application/json:
  *             schema:
@@ -147,7 +147,7 @@ const fetchDetailsForId = async (id) => {
  *                 next:
  *                   type: string
  *       401:
- *         description: No autorizado - Se requiere SESSION_COOKIE válida
+ *         description: Unauthorized - Valid SESSION_COOKIE required
  */
 const fetchIdsForGenus = async (genus) => {
   let page = 0;

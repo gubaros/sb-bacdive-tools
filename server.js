@@ -16,23 +16,23 @@ const bacteriaIndex = new Map(
 
 app.use(express.json());
 
-// Configuración de Swagger
+// Swagger Configuration
 const swaggerOptions = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'API de Taxonomía Bacteriana',
+      title: 'Bacterial Taxonomy API',
       version: '1.0.0',
-      description: 'API REST para consultar información taxonómica de bacterias',
+      description: 'REST API for querying bacterial taxonomic information',
     },
     servers: [
       {
         url: `http://localhost:${PORT}`,
-        description: 'Servidor de desarrollo',
+        description: 'Development server',
       },
     ],
   },
-  apis: ['./server.js'], // archivos que contienen anotaciones
+  apis: ['./server.js'], // files containing annotations
 };
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
@@ -42,21 +42,21 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
  * @swagger
  * /api/bacteria:
  *   get:
- *     summary: Obtiene lista paginada de bacterias
+ *     summary: Get paginated list of bacteria
  *     parameters:
  *       - in: query
  *         name: page
  *         schema:
  *           type: integer
- *         description: Número de página
+ *         description: Page number
  *       - in: query
  *         name: limit
  *         schema:
  *           type: integer
- *         description: Cantidad de registros por página
+ *         description: Number of records per page
  *     responses:
  *       200:
- *         description: Lista de bacterias
+ *         description: List of bacteria
  */
 app.get('/api/bacteria', (req, res) => {
   const page = parseInt(req.query.page) || 1;
@@ -78,19 +78,19 @@ app.get('/api/bacteria', (req, res) => {
  * @swagger
  * /api/bacteria/{id}:
  *   get:
- *     summary: Obtiene información detallada de una bacteria
+ *     summary: Get detailed information for a specific bacteria
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: Identificador de la bacteria
+ *         description: Bacteria identifier
  *     responses:
  *       200:
- *         description: Detalles de la bacteria
+ *         description: Bacteria details
  *       404:
- *         description: Bacteria no encontrada
+ *         description: Bacteria not found
  */
 app.get('/api/bacteria/:id', (req, res) => {
   const bacteria = bacteriaIndex.get(req.params.id);
@@ -104,21 +104,21 @@ app.get('/api/bacteria/:id', (req, res) => {
  * @swagger
  * /api/search:
  *   get:
- *     summary: Busca bacterias por género y/o especie
+ *     summary: Search bacteria by genus and/or species
  *     parameters:
  *       - in: query
  *         name: genus
  *         schema:
  *           type: string
- *         description: Nombre del género
+ *         description: Genus name
  *       - in: query
  *         name: species
  *         schema:
  *           type: string
- *         description: Nombre de la especie
+ *         description: Species name
  *     responses:
  *       200:
- *         description: Resultados de la búsqueda
+ *         description: Search results
  */
 app.get('/api/search', (req, res) => {
   const { genus, species } = req.query;
@@ -147,10 +147,10 @@ app.get('/api/search', (req, res) => {
  * @swagger
  * /api/stats:
  *   get:
- *     summary: Obtiene estadísticas del conjunto de datos
+ *     summary: Get dataset statistics
  *     responses:
  *       200:
- *         description: Estadísticas generales
+ *         description: General statistics
  */
 app.get('/api/stats', (req, res) => {
   const stats = {
@@ -161,9 +161,10 @@ app.get('/api/stats', (req, res) => {
   res.json(stats);
 });
 
-export default app;
-
-app.listen(PORT, () => {
+// Exportar el servidor para poder cerrarlo en las pruebas
+const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`Total records loaded: ${bacteriaData.length}`);
-}); 
+});
+
+export { app, server };  // Exportamos tanto app como server 

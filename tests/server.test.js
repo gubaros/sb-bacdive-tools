@@ -1,7 +1,11 @@
 import request from 'supertest';
-import app from '../server.js';
+import { app, server } from '../server.js';
 
 describe('API Tests', () => {
+  afterAll(done => {
+    server.close(done);
+  });
+
   test('GET /api/stats should return database statistics', async () => {
     const response = await request(app)
       .get('/api/stats')
