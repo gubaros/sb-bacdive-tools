@@ -1,11 +1,6 @@
 import axios from 'axios';
 import dotenv from 'dotenv';
 import { writeFileSync } from 'fs';
-<<<<<<< HEAD
-import swaggerUi from 'swagger-ui-express';
-import swaggerJsdoc from 'swagger-jsdoc';
-=======
->>>>>>> origin/main
 
 dotenv.config();
 
@@ -18,69 +13,6 @@ if (!SESSION_COOKIE) {
   process.exit(1);
 }
 
-<<<<<<< HEAD
-/**
- * @swagger
- * components:
- *   schemas:
- *     BacteriaDetail:
- *       type: object
- *       properties:
- *         identifier:
- *           type: string
- *           description: Unique BacDive ID of the bacteria
- *         general:
- *           type: object
- *           properties:
- *             description:
- *               type: string
- *             DSM_Number:
- *               type: string
- *             NCBI_tax_id:
- *               type: string
- *             keywords:
- *               type: array
- *               items:
- *                 type: string
- *         taxonomy:
- *           type: object
- *           properties:
- *             genus:
- *               type: string
- *             species:
- *               type: string
- *             strain_designation:
- *               type: string
- *             type_strain:
- *               type: boolean
- *             full_scientific_name:
- *               type: string
- */
-
-/**
- * @swagger
- * /fetch/{id}:
- *   get:
- *     summary: Get details for a bacteria by ID
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *         description: BacDive ID of the bacteria
- *     responses:
- *       200:
- *         description: Bacteria details
- *         content:
- *           application/json:
- *             schema:
- *               $ref: '#/components/schemas/BacteriaDetail'
- *       404:
- *         description: Bacteria not found
- *       401:
- *         description: Unauthorized - Valid SESSION_COOKIE required
- */
 const fetchDetailsForId = async (id) => {
   if (!id || id === "0") {
     console.error(`Skipping invalid ID: ${id}`);
@@ -117,44 +49,6 @@ const fetchDetailsForId = async (id) => {
   }
 };
 
-/**
- * @swagger
- * /taxon/{genus}:
- *   get:
- *     summary: Get all bacteria IDs for a specific genus
- *     parameters:
- *       - in: path
- *         name: genus
- *         required: true
- *         schema:
- *           type: string
- *         description: Bacterial genus name
- *       - in: query
- *         name: page
- *         schema:
- *           type: integer
- *         description: Page number for pagination
- *     responses:
- *       200:
- *         description: List of bacteria IDs
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 results:
- *                   type: array
- *                   items:
- *                     type: string
- *                 count:
- *                   type: integer
- *                 next:
- *                   type: string
- *       401:
- *         description: Unauthorized - Valid SESSION_COOKIE required
- */
-=======
->>>>>>> origin/main
 const fetchIdsForGenus = async (genus) => {
   let page = 0;
   let allIds = [];
@@ -192,69 +86,6 @@ const fetchIdsForGenus = async (genus) => {
   return allIds;
 };
 
-<<<<<<< HEAD
-/**
- * @swagger
- * components:
- *   schemas:
- *     TransformedBacteria:
- *       type: object
- *       properties:
- *         identifier:
- *           type: string
- *         general:
- *           type: object
- *         taxonomy:
- *           type: object
- *         culture_conditions:
- *           type: object
- *         physiology_and_metabolism:
- *           type: object
- *         biosafety:
- *           type: object
- *         sequence_information:
- *           type: object
- *         external_links:
- *           type: object
- */
-=======
-const fetchDetailsForId = async (id) => {
-  if (!id || id === "0") {
-    console.error(`Skipping invalid ID: ${id}`);
-    return null;
-  }
-
-  try {
-    const url = `${FETCH_BASE_URL}/${id}`;
-    console.log(`Fetching details for ID: ${id} from ${url}`);
-    const response = await axios.get(url, {
-      headers: {
-        'Accept': 'application/json',
-        'Cookie': `bacdive_api_session=${SESSION_COOKIE}`
-      }
-    });
-
-    const results = response.data.results;
-    if (!results || !results[id]) {
-      console.error(`No details found for ID ${id}`);
-      return null;
-    }
-
-    const detail = results[id];
-    if (!detail["General"]) {
-      detail["General"] = {};
-    }
-    detail["General"]["BacDive-ID"] = id;
-    
-    console.log(`Successfully fetched and processed ID: ${id}`);
-    return detail;
-  } catch (error) {
-    console.error(`Error fetching details for ID ${id}: ${error.response?.status || error.message}`);
-    return null;
-  }
-};
-
->>>>>>> origin/main
 const transformDetails = (rawData) => {
   try {
     const identifier = rawData["General"]["BacDive-ID"];
@@ -308,7 +139,7 @@ const transformDetails = (rawData) => {
 const main = async () => {
   const START_ID = 1;
   const END_ID = 27000;
-  const DELAY_MS = 5;
+  const DELAY_MS = 2;
   const results = [];
 
   console.log(`Starting fetch for IDs ${START_ID} to ${END_ID}`);
@@ -336,4 +167,3 @@ const main = async () => {
 };
 
 main();
-
